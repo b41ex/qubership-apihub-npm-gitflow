@@ -47,7 +47,7 @@ git
     .show([isLernaProject ? "develop:lerna.json" : "develop:package.json"], (err, data) => {
         handleError(err);
         developVersion = JSON.parse(data)["version"];
-        featureVersion = developVersion + "-" + featureName;
+        featureVersion = developVersion.match(/\d+\.\d+\.\d+/)[0] + "-feature-" + featureName + ".0";
     })
     //Change version at feature branch (autocommit)
     .exec(() => {
