@@ -54,10 +54,10 @@ git
         let execPromise;
         if (isLernaProject) {
             console.log("Update versions for lerna project");
-            execPromise = executeCommand(`lerna version ${featureVersion} --message \"RE-42 update version to ${featureVersion}\" --no-push --yes`);
+            execPromise = executeCommand(`lerna version ${featureVersion} --message \"Update version to ${featureVersion}\" --no-push --yes`);
         } else {
             console.log("Update versions for project");
-            execPromise = executeCommand("npm version -m \"RE-42 update version to " + featureVersion + "\" " + featureVersion);
+            execPromise = executeCommand("npm version -m \"Update version to " + featureVersion + "\" " + featureVersion);
         }
         execPromise.then(() => {
             git  //Push

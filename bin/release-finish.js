@@ -124,7 +124,7 @@ function createAndPushTag(version) {
 
 function commit(message) {
     return new Promise((resolve) => {
-        git.raw(["commit", "-a", "--no-edit", "-m RE-42 Release: " + message], (err) => {
+        git.raw(["commit", "-a", "--no-edit", "-m Release: " + message], (err) => {
             handleError(err);
             console.log("Commit!");
             resolve();
