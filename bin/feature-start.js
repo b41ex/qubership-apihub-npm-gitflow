@@ -57,7 +57,7 @@ git
             execPromise = executeCommand(`lerna version ${featureVersion} --message \"Update version to ${featureVersion}\" --no-push --yes`);
         } else {
             console.log("Update versions for project");
-            execPromise = executeCommand("npm version -m \"Update version to " + featureVersion + "\" " + featureVersion);
+            execPromise = executeCommand("npm version -m \"Update version to %s\" " + featureVersion);
         }
         execPromise.then(() => {
             git  //Push
