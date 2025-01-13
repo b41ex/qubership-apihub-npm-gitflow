@@ -30,9 +30,6 @@ jobs:
           node-version: '20'
           registry-url: 'https://npm.pkg.github.com/'
 
-      - name: Authenticate to GitHub NPM Registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc     
-
       - name: Bump version and commit (prerelease only)
         id: bump_version
         if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/release') || startsWith(github.ref, 'refs/heads/feature/')
@@ -71,15 +68,13 @@ jobs:
           if [ -n "$TAG_NAME" ]; then
             npm publish --tag "$TAG_NAME"
           fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes back
         if: env.bump_version == 'true'
         run: |
           git push origin HEAD
-
-      - name: Cleanup
-        if: always()
-        run: rm ~/.npmrc
 
   on-delete:
     if: github.event_name == 'delete'
