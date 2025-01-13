@@ -103,9 +103,9 @@ function changePackageJsonVersion(version) {
     });
 }
 
-function changeLernaProjectVersion(version, brunchName) {
+function changeLernaProjectVersion(version, branchName) {
     return new Promise((resolve) => {
-        exec(`lerna version ${version} --no-push --no-git-tag-version --allow-branch ${brunchName} --yes`, err => {
+        exec(`lerna version ${version} --no-push --no-git-tag-version --allow-branch ${branchName} --yes`, err => {
             handleError(err);
             resolve();
         });
