@@ -27,6 +27,7 @@ const packageJsonFile = require(packageJsonPath);
 
 let releaseVersion;
 
+//TODO: add check that release is already in progress
 switchToDevelopAndPull()
     .then(() => checkPackageJsonVersions())
     .then(() => isLernaProject ? getLernaVersion() : getPackageJsonVersion())
@@ -71,6 +72,7 @@ function createReleaseBranch(releaseVersion) {
 function changePackageJsonVersion(version) {
     return new Promise((resolve) => {
         packageJsonFile.version = version;
+        //TODO: use npm to set version
         fs.writeFile(packageJsonPath, JSON.stringify(packageJsonFile, null, 2), err => {
             handleError(err);
             console.log("Version of package.json changed to " + version);

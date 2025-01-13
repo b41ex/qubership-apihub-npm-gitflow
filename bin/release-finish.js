@@ -33,10 +33,10 @@ pullAll()
         //Get version in release branch
         git.show([isLernaProject ? "release:lerna.json" : "release:package.json"], (err, data) => {
             handleError(err);
-        this.version = JSON.parse(data)["version"].match(/\d+\.\d+\.\d+/)[0]
+            this.version = JSON.parse(data)["version"].match(/\d+\.\d+\.\d+/)[0]
             this.releaseBranch = 'release'        
         })
-    })
+    })    
   .then(() => switchToBranch('main'))
     .then(() => mergeFromBranch(this.releaseBranch))
   .then(() => isLernaProject ? changeLernaProjectVersion(this.version, 'main') : changePackageJsonVersion(this.version))
@@ -94,6 +94,7 @@ function mergeFromBranch(branch) {
 
 function changePackageJsonVersion(version) {
     return new Promise((resolve) => {
+        //TODO: use npm to set version
         packageJsonFile.version = version;
         fs.writeFile(packageJsonPath, JSON.stringify(packageJsonFile, null, 2), err => {
             handleError(err);
