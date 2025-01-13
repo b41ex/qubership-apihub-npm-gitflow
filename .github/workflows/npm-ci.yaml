@@ -37,6 +37,8 @@ jobs:
         id: bump_version
         if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/release') || startsWith(github.ref, 'refs/heads/feature/')
         run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"          
           CURRENT_BRANCH=$(echo $GITHUB_REF | sed 's/refs\/heads\///')
           if [[ "$CURRENT_BRANCH" == "develop" || "$CURRENT_BRANCH" == "release" || "$CURRENT_BRANCH" == feature/* ]]; then
             npm version prerelease -m "chore: bump prerelease version to %s [ci skip]"
@@ -73,8 +75,6 @@ jobs:
       - name: Push changes back
         if: env.bump_version == 'true'
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
           git push origin HEAD
 
       - name: Cleanup
