@@ -30,7 +30,7 @@ let releaseVersion;
 switchToDevelopAndPull()
     .then(() => checkPackageJsonVersions())
     .then(() => isLernaProject ? getLernaVersion() : getPackageJsonVersion())
-    .then(releaseVersion => this.releaseVersion = releaseVersion)
+    .then(releaseVersion => this.releaseVersion = releaseVersion + '-next.0')
     .then(() => createReleaseBranch(this.releaseVersion))
     .then(() => isLernaProject ? changeLernaProjectVersion(this.releaseVersion) : changePackageJsonVersion(this.releaseVersion))
     .then(() => commitAndPushRelease(this.releaseVersion));
