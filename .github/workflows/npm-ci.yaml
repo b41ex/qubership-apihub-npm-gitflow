@@ -80,9 +80,6 @@ jobs:
     if: github.event_name == 'delete'
     runs-on: ubuntu-latest
     steps:
-      - name: Authenticate to GitHub NPM Registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-
       - name: Delete associated tag
         run: |
           DELETED_BRANCH=$(echo $GITHUB_REF | sed 's/refs\/heads\///')
@@ -92,7 +89,5 @@ jobs:
               npm dist-tag rm "$TAG_NAME" "$DELETED_BRANCH"
             fi
           fi
-
-      - name: Cleanup
-        if: always()
-        run: rm ~/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
