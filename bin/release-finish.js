@@ -28,11 +28,14 @@ let releaseBranch;
 let version;
 
 pullAll()
-    .then(() => getCurrentBranchName())
-    .then(branch => {
-        if (branch.search("release") === -1) handleError("You are trying to release not release branch: " + branch);
-        this.releaseBranch = branch;
-        this.version = branch.match(/\d+\.\d+\.\d+/)[0];
+    .then(() => switchToBranch('release'))
+    .then(() => {
+        //Get version in release branch
+        git.show([isLernaProject ? "release:lerna.json" : "release:package.json"], (err, data) => {
+            handleError(err);
+        this.version = JSON.parse(data)["version"].match(/\d+\.\d+\.\d+/)[0]
+            this.releaseBranch = 'release'        
+        })
     })
   .then(() => switchToBranch('main'))
     .then(() => mergeFromBranch(this.releaseBranch))

@@ -60,7 +60,7 @@ function getLernaVersion() {
 
 function createReleaseBranch(releaseVersion) {
     return new Promise(resolve => {
-        git.raw(["checkout", "-b", "release/" + releaseVersion, "develop"], err => {
+        git.raw(["checkout", "-b", "release", "develop"], err => {
             handleError(err);
             console.log("Create release branch with version: " + releaseVersion);
             resolve();
@@ -93,7 +93,7 @@ function commitAndPushRelease(releaseVersion) {
         git.raw(["commit", "-a", "--no-edit", "-m Release start. Version: " + releaseVersion], (err) => {
             handleError(err);
             console.log("Commit!")
-        }).raw(["push", "--set-upstream", "origin", "release/" + releaseVersion], (err) => {
+        }).raw(["push", "--set-upstream", "origin", "release"], (err) => {
             handleError(err);
             console.log("Push!");
             resolve();
