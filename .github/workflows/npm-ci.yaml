@@ -31,10 +31,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com/'
 
       - name: Authenticate to GitHub NPM Registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-
-      - name: Install dependencies
-        run: npm install
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc     
 
       - name: Bump version and commit (prerelease only)
         id: bump_version
@@ -47,6 +44,9 @@ jobs:
           else
             echo "bump_version=false" >> $GITHUB_ENV
           fi
+      
+      - name: Install dependencies
+        run: npm install
 
       - name: Build the package
         run: npm run build --if-present
