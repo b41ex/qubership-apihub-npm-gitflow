@@ -129,7 +129,7 @@ function hasNotStableDependencies() {
     let notStableDependencies;
     for (let property in dependencies) {
         const version = dependencies[property];
-        if ((!version.match(/^\d+\.\d+\.\d/) || version.includes("develop")) && (!version.match(/^git:|^git\+https:|^git\+http:|^git\+ssh:|^git\+file:/))) {
+        if ((!version.match(/^\d+\.\d+\.\d/) || version.includes("dev")) && (!version.match(/^git:|^git\+https:|^git\+http:|^git\+ssh:|^git\+file:/))) {
             notStableDependencies = true;
             console.error("Not stable: " + property + ":" + version);
         }

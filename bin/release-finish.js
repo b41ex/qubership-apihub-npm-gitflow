@@ -46,7 +46,7 @@ pullAll()
     .then(() => switchToBranch("develop"))
     .then(() => mergeFromBranch(this.releaseBranch))
     .then(() => isLernaProject ? getIncrementedLernaVersion() : getIncrementedPackageJsonVersion())
-    .then(incVersion => isLernaProject ? changeLernaProjectVersion(incVersion + "-develop.0", "develop") : changePackageJsonVersion(incVersion + "-develop.0"))
+    .then(incVersion => isLernaProject ? changeLernaProjectVersion(incVersion + "-dev.0", "develop") : changePackageJsonVersion(incVersion + "-dev.0"))
     .then(() => commit(this.version))
     .then(() => push())
     .then(() => deleteBranch(this.releaseBranch));
