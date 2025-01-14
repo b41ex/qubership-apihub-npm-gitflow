@@ -92,7 +92,7 @@ function changeLernaProjectVersion(version) {
 
 function commitAndPushRelease(releaseVersion) {
     return new Promise((resolve) => {
-        git.raw(["commit", "-a", "--no-edit", "-m Release start. Version: " + releaseVersion], (err) => {
+        git.raw(["commit", "-a", "--no-edit", "-m chore: release start, version: " + releaseVersion], (err) => {
             handleError(err);
             console.log("Commit!")
         }).raw(["push", "--set-upstream", "origin", "release"], (err) => {

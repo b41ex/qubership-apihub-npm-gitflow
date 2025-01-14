@@ -115,7 +115,7 @@ function changeLernaProjectVersion(version, branchName) {
 
 function createAndPushTag(version) {
     return new Promise(resolve => {
-        git.raw(["tag", "-a", version, "-m Release :" + version], (err) => {
+        git.raw(["tag", "-a", version, "-m chore: release :" + version], (err) => {
             handleError(err);
             console.log("Git tag. Version: " + version);
         }).raw(["push", "origin", version], (err) => {
@@ -128,7 +128,7 @@ function createAndPushTag(version) {
 
 function commit(message) {
     return new Promise((resolve) => {
-        git.raw(["commit", "-a", "--no-edit", "-m Release: " + message], (err) => {
+        git.raw(["commit", "-a", "--no-edit", "-m chore: release: " + message], (err) => {
             handleError(err);
             console.log("Commit!");
             resolve();
